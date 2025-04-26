@@ -4,12 +4,13 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-object Home
+object HomeRoute
 
 
 @Serializable
-data class Quiz(
+data class QuizRoute(
     val questions: Int,
     val category: String,
-    val difficulty: String
+    val difficulty: String,
+    val type: String
 )

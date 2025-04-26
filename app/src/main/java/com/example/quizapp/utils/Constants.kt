@@ -61,3 +61,5 @@ object Constants{
     val type = listOf("Multiple Choice", "True/False")
 }
 
+val BASE_URL = "https://opentdb.com/"
+

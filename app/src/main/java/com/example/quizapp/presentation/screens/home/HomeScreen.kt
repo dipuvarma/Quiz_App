@@ -19,7 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.quizapp.presentation.navigation.Quiz
+import com.example.quizapp.presentation.navigation.QuizRoute
 import com.example.quizapp.presentation.screens.home.component.HomeDropDownComp
 import com.example.quizapp.presentation.screens.home.component.HomeTopBarComp
 import com.example.quizapp.utils.Constants
@@ -84,10 +84,11 @@ fun HomeScreen(
         Button(
             onClick = {
                 navController.navigate(
-                    Quiz(
+                    route = QuizRoute(
                         questions = state.value.questions,
                         category = state.value.category,
                         difficulty = state.value.difficulty,
+                        type = state.value.type
                         )
                 )
                 Log.d(

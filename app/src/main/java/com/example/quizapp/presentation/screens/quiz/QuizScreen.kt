@@ -11,25 +11,51 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.quizapp.presentation.common.TopAppBarComp
-import com.example.quizapp.presentation.screens.home.HomeScreenEvent
+import com.example.quizapp.utils.Constants
 
 @Composable
 fun QuizScreen(
     questions: Int,
     category: String,
-    difficulty: String
+    difficulty: String,
+    navController: NavHostController,
+    viewModel: QuizScreenViewModel,
+    event: (QuizScreenEvent) -> Unit,
+    type: String,
 ) {
+    LaunchedEffect(key1 = Unit) {
+        val difficulty = when(difficulty){
+            "Easy" -> "easy"
+            "Medium" -> "medium"
+            else -> "hard"
+        }
+
+        val type = when(type){
+            "Multiple Choice" -> "multiple"
+            else -> "boolean"
+        }
+
+        event(
+            QuizScreenEvent.GetQuizList(
+                numOfQuiz = questions,
+                category = Constants.categoriesMap[category]!!,
+                difficulty = difficulty,
+                type = type
+            )
+        )
+    }
+
     Column(
         modifier = Modifier
             .statusBarsPadding()
