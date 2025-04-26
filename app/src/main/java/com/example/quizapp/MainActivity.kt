@@ -2,29 +2,49 @@ package com.example.quizapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.compose.QuizAppTheme
+import com.example.quizapp.presentation.common.TopAppBarComp
+import com.example.quizapp.presentation.screens.home.HomeScreen
+import com.example.quizapp.presentation.screens.home.HomeScreenViewModel
+import com.example.quizapp.presentation.screens.home.component.HomeDropDownComp
+import com.example.quizapp.presentation.screens.quiz.QuizScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val viewModel : HomeScreenViewModel by viewModels()
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            SystemBarStyle.dark(
+                Color(0xFF0F152A).toArgb()
+            )
+        )
         setContent {
             QuizAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    ) {
-
-                    }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = MaterialTheme.colorScheme.background)
+                ) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        event = viewModel::onEvent
+                    )
                 }
             }
         }

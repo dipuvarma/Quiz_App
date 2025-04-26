@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Light theme -->
+    <color name="status_bar_light">@android:color/white</color>
+    <color name="nav_bar_light">@android:color/white</color>
+
+    <!-- Dark theme -->
+    <color name="status_bar_dark">@android:color/black</color>
+    <color name="nav_bar_dark">@android:color/black</color>
+
 </resources>
