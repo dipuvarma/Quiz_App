@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -21,11 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.quizapp.presentation.common.TopAppBarComp
+import com.example.quizapp.presentation.screens.home.HomeScreenEvent
 
-@Preview(showSystemUi = true)
 @Composable
 fun QuizScreen(
-    modifier: Modifier = Modifier,
+    questions: Int,
+    category: String,
+    difficulty: String
 ) {
     Column(
         modifier = Modifier
@@ -33,8 +36,8 @@ fun QuizScreen(
             .fillMaxSize()
     ) {
         TopAppBarComp(
-            title = "Quiz",
-            navigationIcon = Icons.Default.ArrowBack,
+            title = category,
+            navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
             onClickNavigationIcon = { }
         )
         Spacer(modifier = Modifier.height(24.dp))
@@ -46,13 +49,13 @@ fun QuizScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Quiz : 60",
+                text = "Quiz : $questions",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     color = MaterialTheme.colorScheme.onBackground
                 )
             )
             Text(
-                text = "3:00 min",
+                text = difficulty,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     color = MaterialTheme.colorScheme.onBackground
                 )

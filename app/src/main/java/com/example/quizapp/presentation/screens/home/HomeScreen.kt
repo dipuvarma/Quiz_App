@@ -17,8 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.quizapp.presentation.navigation.Quiz
 import com.example.quizapp.presentation.screens.home.component.HomeDropDownComp
 import com.example.quizapp.presentation.screens.home.component.HomeTopBarComp
 import com.example.quizapp.utils.Constants
@@ -27,6 +28,7 @@ import com.example.quizapp.utils.Constants
 fun HomeScreen(
     viewModel: HomeScreenViewModel,
     event: (HomeScreenEvent) -> Unit,
+    navController: NavHostController,
 ) {
 
     val state = viewModel.homeState.collectAsState()
@@ -81,7 +83,17 @@ fun HomeScreen(
 
         Button(
             onClick = {
-                Log.d("TAG", "${state.value.questions} ${state.value.category} ${state.value.difficulty} ${state.value.type}")
+                navController.navigate(
+                    Quiz(
+                        questions = state.value.questions,
+                        category = state.value.category,
+                        difficulty = state.value.difficulty,
+                        )
+                )
+                Log.d(
+                    "TAG",
+                    "${state.value.questions} ${state.value.category} ${state.value.difficulty} ${state.value.type}"
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()

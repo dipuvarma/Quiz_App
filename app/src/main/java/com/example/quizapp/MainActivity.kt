@@ -20,14 +20,16 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.compose.QuizAppTheme
 import com.example.quizapp.presentation.common.TopAppBarComp
+import com.example.quizapp.presentation.navigation.QuizAppNavGraph
 import com.example.quizapp.presentation.screens.home.HomeScreen
 import com.example.quizapp.presentation.screens.home.HomeScreenViewModel
 import com.example.quizapp.presentation.screens.home.component.HomeDropDownComp
 import com.example.quizapp.presentation.screens.quiz.QuizScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel : HomeScreenViewModel by viewModels()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
             SystemBarStyle.dark(
@@ -41,10 +43,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    HomeScreen(
-                        viewModel = viewModel,
-                        event = viewModel::onEvent
-                    )
+                    QuizAppNavGraph()
                 }
             }
         }
