@@ -17,7 +17,6 @@ class QuizScreenViewModel @Inject constructor(
     private val quizAppUseCase: QuizAppUseCase,
 ) : ViewModel() {
 
-
     private val _quizState = MutableStateFlow(QuizScreenState())
     val quizState = _quizState.stateIn(
         scope = viewModelScope,
@@ -66,6 +65,4 @@ class QuizScreenViewModel @Inject constructor(
             }
         }
     }
-
-
 }
