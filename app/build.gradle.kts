@@ -77,5 +77,9 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
 
+    //shimmer effect
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.3.2")
+
+
 
 }

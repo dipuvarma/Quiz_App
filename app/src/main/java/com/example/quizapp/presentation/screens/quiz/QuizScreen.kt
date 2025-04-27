@@ -1,5 +1,6 @@
 package com.example.quizapp.presentation.screens.quiz
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,14 +22,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.quizapp.presentation.common.ShimmerQuizLayout
 import com.example.quizapp.presentation.common.TopAppBarComp
 import com.example.quizapp.presentation.screens.quiz.component.QuizShowComp
 import com.example.quizapp.utils.Constants
+import com.valentinilk.shimmer.shimmer
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun QuizScreen(
     questions: Int,
@@ -41,7 +48,6 @@ fun QuizScreen(
 ) {
 
     val quizState = viewModel.quizState.collectAsState()
-
     LaunchedEffect(key1 = Unit) {
         val difficulty = when (difficulty) {
             "Easy" -> "easy"
@@ -101,10 +107,14 @@ fun QuizScreen(
             color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizShowComp(
-            qNumber = 1,
-            quizQuestion = "In what year did the Great October Socialist Revolution take place?"
-        )
+        if (quizState.value.isLoading) {
+            ShimmerQuizLayout()
+        } else {
+            QuizShowComp(
+                qNumber = 1,
+                quizQuestion = "In what year did the Great October Socialist Revolution take place?"
+            )
+        }
         Spacer(modifier = Modifier.height(24.dp))
         Row(
             modifier = Modifier
